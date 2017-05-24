@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from views import landing
+from .views import landing
 
 urlpatterns = [
     # 'home.views',

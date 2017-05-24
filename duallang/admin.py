@@ -1,12 +1,10 @@
 from django.contrib import admin
 
 
-
 # Register your models here.
-from models import FAQTopic
+from .models import FAQTopic
 
 admin.site.register(FAQTopic)
-
 
 
 # class HomeSlideAdmin(admin.TabularInline):
@@ -35,10 +33,10 @@ admin.site.register(FAQTopic)
 #
 #
 #admin.site.register(HomeCarousel, HomeCarouselAdmin)
-#admin.site.register(HomeSlide)
+# admin.site.register(HomeSlide)
 
 from solo.admin import SingletonModelAdmin
-from models import HomeCarousel, HomeSlide
+from .models import HomeCarousel, HomeSlide
 
 
 from django import forms
@@ -52,6 +50,7 @@ class HomeSlideFormSet(BaseInlineFormSet):
     '''
     Validate formset data here
     '''
+
     def clean(self):
         super(HomeSlideFormSet, self).clean()
 
@@ -61,13 +60,15 @@ class HomeSlideFormSet(BaseInlineFormSet):
                 continue
             data = form.cleaned_data
             #percent += data.get('percent', 0)
-            print data
+            print(data)
         # if percent != 100:
         #     raise ValidationError(_('Total of elements must be 100%%. Current : %(percent).2f%%') % {'percent': percent})
+
 
 class HomeSlideAdmin(admin.TabularInline):
     model = HomeSlide
     formset = HomeSlideFormSet
+
 
 class HomeCarouselAdmin(SingletonModelAdmin):
     inlines = (HomeSlideAdmin,)
